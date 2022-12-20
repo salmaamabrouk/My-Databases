@@ -6,7 +6,7 @@ script=${BASH_SOURCE[0]}
 
 src=${script%/*}
 
-PATH=$PATH:$src
+PATH=$src:$PATH
 
 #echo $PATH
 
@@ -17,3 +17,27 @@ cd ~
 cd ./databases
 
 #pwd
+
+select choice in "1: Show available databases" "2: Create new database" "3: Rename a database" "4: Use a database" "5: Drop a database" "6: Disconnect from engine"	
+do
+		case $choice in "1: Show available databases")
+			echo "you chose 1"
+			;;
+				"2: Create new database")
+			echo "you chose 2"
+			;;
+				"3: Rename a database")
+			echo "you chose 3"
+			;;
+				"4: Use a database")
+			echo "you chose 4"
+			;;
+				"5: Drop a database")
+			echo "you chose 5"
+			;;
+				"6: Disconnect from engine")
+			echo "you chose to exit"
+			exit
+			;;
+		esac
+done
