@@ -1,0 +1,16 @@
+#! /bin/bash
+
+if [ $# -ne 1 || $1 -eq "*/*" || $1 -ne "[a-zA-Z]*" ]
+then
+	echo "Invalid argument. Please make sure DB name starts with an alphabet and  does not contain spaces or /";
+
+
+elif [ -d "~/databases/$1" ]
+then
+	echo "Database already exists.";
+else
+	mkdir ~/databases/$1;
+	echo $1 >> ~/databases/databases.list;
+	echo "Database created.";
+fi;
+

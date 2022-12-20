@@ -1,0 +1,162 @@
+README.md file tells user to run Initiate command (with absolute path) to initiate program
+
+Initiate needs to set the scripts path in the PATH var
+
+
+
+---------------------------------------------------------------------
+
+connect databases> 
+
+which connect >> src
+
+PATH=$PATH:$src
+
+## export
+
+cd ~
+
+[ ! -d "~/databases" ] && mkdir ~/databases 
+
+cd ~/databases 
+
+command=""
+
+while (command -ne "Exit")
+
+cat databasses.menu
+
+
+
+
+---------------------------------------------------------------------
+
+
+
+show databases > 
+
+ls ~/databases
+
+---------------------------------------------------------------------
+
+create database <DB name> > mkdir ~/databases/<DB name> 	{create <DB name>.backup dir for commit and rollback
+
+database one word walla multiple
+
+-d " " 
+
+---------------------------------------------------------------------
+
+use <DB name> > cd ~/databases/<DB name>
+
+---------------------------------------------------------------------
+
+drop database <DB name> > rm -r ~/databases/<DB name>
+
+---------------------------------------------------------------------
+
+help >> cat help file in pwd
+
+---------------------------------------------------------------------
+
+create table <table name> > touch <table name>.meta <table name>.data
+>> interactive >
+
+---------------------------------------------------------------------
+
+insert into <table name> 
+>> interactive > asks about each field in a prompt XX
+>> one line command > will you give the option for choosing order?
+
+insert into <table name> {no argument}
+line=""
+loop>> 
+Entert <column name>: 
+x
+line=&line//x
+## check data type and primary key
+
+end loop
+
+---------------------------------------------------------------------
+
+update table <table name>	{no argument}
+enter <primary key>: #n
+sed print line
+
+---------------------------------------------------------------------
+
+select x from <table name> where column x = value
+table=""
+loop $1->n
+if 
+for ($i!="from")
+
+if $a = "from" 
+then 
+table=$a+1
+## check if table exists
+awk -d// {} ./$table
+
+
+case 1:
+$1 = *
+if ($2 = "from")
+then 
+## if $3 is null
+## error. invalid arguments
+## end sript
+## fi
+
+table=$3
+## check if table exists
+## if table doesn't exist
+## error. table $table doesn't exist
+## end sript
+## fi
+
+
+
+else
+## error. invalid arguments
+## end sript
+
+---------------------------------------------------------------------
+
+commit <DB name> > delete <DB name>.backup then recreate it as copy of current <DB name> 	{checkpoint}
+
+echo "Are you sure you want to commit changes?(y/n) " ; read x
+if (x = "y" || x = "Y")
+rm ~/<DB name>.backup/*
+cp -R ~/<DB name> ~/<DB name>.backup
+
+---------------------------------------------------------------------
+
+rollback <DB name> > delete <DB name> then recreate it as copy of current <DB name>.backup 	{checkpoint}
+
+echo "Are you sure you want to commit changes?(y/n) " ; read x
+if (x = "y" || x = "Y")
+rm ~/<DB name>/*
+cp -R ~/<DB name>.backup ~/<DB name>
+
+---------------------------------------------------------------------
+
+
+
+
+
+menus?
+/etc/passwd
+>>>
+metadata
+uname:password:uid:gid:
+string:sting:int:int
+
+#primary key : 
+------------------------------
+data
+ragia:x:32:754:
+
+
+add
+
