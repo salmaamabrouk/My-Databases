@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+
+script=${BASH_SOURCE[0]}
+
+src=${script%/*}
+
+PATH=$PATH:$src
+
+#echo $PATH
+
+cd ~
+
+[ ! -d "./databases" ] && mkdir ./databases
+
+cd ./databases
+
+#pwd
