@@ -1,20 +1,20 @@
 #! /bin/bash
 
-echo "Enter database name: "
-echo "Please make sure DB name starts with an alphabet and  doesn't contain spaces or /"
-read input
+read -p "Enter database name: " name
+# echo "Please make sure DB name starts with an alphabet and  does not contain spaces or /"
 
-if [ $input1 = "*/*" || $input != "[a-zA-Z]*" ]
+
+if [[ $name = */* || $name != ^[a-zA-Z]* ]]
 then
-	echo "Invalid argument. Please make sure DB name starts with an alphabet and  doesn't contain spaces or /"
+	echo "Invalid argument." # Please make sure DB name starts with an alphabet and  doesn't contain spaces or /"
 
 
-elif [ -d "~/databases/$input" ]
+elif [[ -d "~/databases/$name" ]]
 then
 	echo "Database already exists."
 else
-	mkdir ~/databases/$input
-	echo $input >> ~/databases/list
+	mkdir ~/databases/$name
+	echo $name >> ~/databases/databases.list
 	echo "Database created."
 fi
 

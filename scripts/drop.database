@@ -1,0 +1,27 @@
+#!/bin/bash
+
+read -p "Enter database name to delete: " name
+
+read -p "Are you sure? (y/n)" check
+
+if [[ ${check} == "y" || ${check} == "Y" ]]
+then
+if [ !-d "./databases/${name}" ]
+then
+printf "Database does not exist"
+else
+rm -r ./databases/$name
+sed -i `d "$name"` databases/databases.list
+printf "Database successfully deleted."
+exit
+fi
+elif [[ ${check} == "n" || ${check} == "N" ]]
+then
+	printf " Database retained. "
+	exit
+else
+	printf " Invalid choice. "
+	exit
+
+fi
+exit
