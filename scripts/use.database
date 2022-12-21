@@ -22,28 +22,32 @@ cd ../databases/${db}
 
 fi
 
-pwd
-
-select choice in "1: Show available databases" "2: Create new database" "3: Rename a database" "4: Use a database" "5: Drop a database" "6: Disconnect from engine"	
+select choice in "Show tables" "Create new table" "Describe table" "Rename a table" "Drop table" "Select from table" "Insert record into table" "Delete record from table" "Return to main menu"
 do
 		case $choice in 
-				"1: Show available databases")
-			echo "you chose 1"
+				"Show tables")
+			../../scripts/show.tables
 			;;
-				"2: Create new database")
-			echo "you chose 1"
+				"Create new table")
+			../../scripts/create.table
 			;;
-				"3: Rename a database")
-			echo "you chose 1"
+				"Rename a table")
+			../../scripts/rename.table
 			;;
-				"4: Use a database")
-			echo "you chose 4"
+				"Drop table")
+			../../scripts/drop.table
 			;;
-				"5: Drop a database")
-			echo "you chose 1"
+				"Select from table")
+			../../scripts/select.from.table
 			;;
-				"6: Disconnect from engine")
-			echo "You have disconnected from databases"
+				"Insert record into table")
+			../../scripts/insert.into.table
+			;;
+				"Delete record from table")
+			../../scripts/delete.from.table
+			;;
+				"Return to main menu")
+			echo "Leaving database"
 			exit
 			;;
 		esac

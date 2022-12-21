@@ -1,18 +1,10 @@
 #!/bin/bash
 
-
-
 script=${BASH_SOURCE[0]}
 
 src=${script%/*}
 
 export src
-
-# echo $src
-
-# export PATH=$PATH:$src
-
-# echo $PATH
 
 cd $src/..
 
@@ -20,28 +12,26 @@ cd $src/..
 
 cd scripts
 
-pwd
-
-select choice in "1: Show available databases" "2: Create new database" "3: Rename a database" "4: Use a database" "5: Drop a database" "6: Disconnect from engine"	
+select choice in "Show available databases" "Create new database" "Rename a database" "Use a database" "Drop a database" "Disconnect from engine"	
 do
 		case $choice in 
 
-				"1: Show available databases")
+				"Show available databases")
 			./show.databases
 			;;
-				"2: Create new database")
+				"Create new database")
 			./create.database
 			;;
-				"3: Rename a database")
+				"Rename a database")
 			./rename.database
 			;;
-				"4: Use a database")
+				"Use a database")
 			./use.database
 			;;
-				"5: Drop a database")
+				"Drop a database")
 			./drop.database
 			;;
-				"6: Disconnect from engine")
+				"Disconnect from engine")
 			echo "You have disconnected from databases"
 			exit
 			;;

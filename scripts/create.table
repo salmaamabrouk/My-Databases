@@ -1,0 +1,77 @@
+#! /bin/bash
+
+read -e -p "Enter table name: " name
+
+condition1='[0-9]*'
+condition2='*[\!@#$%^&*()-+=|\["\}\{\]/?><:;\.,`~ ]*'
+
+if [[ ${name} == $condition1 ]] || [[ ${name} == $condition2 ]] || [[ ${name} == "" ]] || [[ ${name} == ["'"] ]]
+then
+	echo "Invalid argument.Please make sure table name doesn't contain spaces or special characters"
+	exit
+
+elif [[ -d ./${name}.meta ]]
+then
+	echo "Table already exists."
+	exit
+
+else
+	touch ${name}.meta ${name}.data
+	echo ${name} >> tables.list
+
+
+echo "Please enter column names followed by data type: "
+echo "Primary key is determined by first column. Triple Enter when you have no more columns."
+
+
+
+read -e -p "Enter primary key: " pk
+read -e -p "Enter datatype (int/str): " pktp
+
+line1=${pk}
+line2=${pktp}
+
+col="init"
+typeset -i i
+
+i=2
+
+while [[ ${col} != "" ]]
+do
+
+read -e -p "Enter column ${i} name: " col
+
+if [[ ${col} == $condition1 ]] || [[ ${col} == $condition2 ]] || [[ ${col} == ["'"] ]]
+then
+echo "Invalid input. Please make sure column name doesn't contain spaces or special characters"
+continue
+else
+line1=$line1:$col
+fi
+
+read -e -p "Enter column ${i} datatype (int/str): " tp
+if [[ ${tp} == "int" || ${tp} == "str" ]]
+then
+
+line2=$line2:$tp
+elif [[ ${tp} == "" ]]
+then
+continue
+
+else
+echo "Invalid input."
+fi
+
+let i=i+1
+
+done
+
+echo ${line1} >> ${name}.meta
+echo ${line2} >> ${name}.meta
+
+echo "${i}" >> ${name}.meta
+echo "${pk}" >> ${name}.meta
+
+echo "Table created successfully."
+
+fi

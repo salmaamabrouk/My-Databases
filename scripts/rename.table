@@ -1,0 +1,33 @@
+#!/bin/bash
+
+read -e -p "Choose table: " old
+read -e -p "Enter new table name: " new
+
+rg1='[0-9]*'
+rg2='*[\!@#$%^&*()-+=|\["\}\{\]/?><:;\.,`~ ]*'
+
+if [[ ${new} == $rg1 ]] || [[ ${new} == $rg2 ]] || [[ ${new} == "" ]] || [[ ${new} == ["'"] ]]
+then
+	echo "Invalid argument.Please make sure table name starts with an alphabet and  doesn't contain spaces or /"
+
+elif [[ ! -f ${old}.meta ]]
+then
+	echo "Table does not exist."
+
+elif [[ -f ${new}.meta ]]
+then
+echo "Another table already already exists under the new name."
+
+else
+
+mv ${old}.meta ${new}.meta
+mv ${old}.data ${new}.data
+
+#sed -i `d "${old}"` databases/databases.list
+#sed -i `d "${new"` databases/databases.list
+
+sed -i 's/${old}/${new}/g' tables.list
+
+echo "Table renamed successfully."
+
+fi

@@ -26,7 +26,7 @@ mv ../databases/${old} ../databases/${new}
 #sed -i `d "${old}"` databases/databases.list
 #sed -i `d "${new"` databases/databases.list
 
-sed -i 's/${old}/${new}/g' ../databases/databases.list
+sed -i 's/"${old}"/"${new}"/g' ../databases/databases.list
 
 echo "Database renamed successfully."
 

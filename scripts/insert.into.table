@@ -1,0 +1,62 @@
+#!/bin/bash
+
+read -p "Enter table name : " tablename
+
+condition1='[0-9]*'
+condition2='*[\!@#$%^&*()-+=|\["\}\{\]/?><:;\.,`~ ]*'
+condition3='*[\!#$%^&*()-+=|\["\}\{\]/?><:\`~]*'
+
+if [[ ${tablename} == $condition1 ]] || [[ ${tablename} == $condition2 ]] || [[ ${tablename} == "" ]] || [[ ${tablename} == ["'"] ]]
+then
+	echo "Invalid name."
+
+elif [[ ! -f ${tablename}.meta ]]
+then
+	echo "Table does not exist."
+else
+
+typeset -i count=`awk -F : '{if(NR==3){print $1}}' ${tablename}.meta` 
+newline=""
+
+for {i=1; i<=count; i++}
+do
+
+#get data type of  column i 
+datatype='awk -F : '{if(NR==2){print $i}}' ${tablename}.meta'
+columnname='awk -F : '{if(NR==1){print $i}}' ${tablename}.meta'
+
+
+read -p "Enter value of ${columnname} :" value
+
+if [[ datatype == "int" && ${value} =~ '^[0-9]+$' ]]
+then 
+newline=${newline}$value:
+
+elif [[ datatype == "str" && ${value} != ${condition3} ]]
+then
+newline=${newline}$value:
+else
+echo "Invalid datatype"
+exit
+
+fi
+
+if [[ i == 1 ]] 
+then 
+result=""
+result=`awk -F : '{if($1==$value){print 1}}' ${tablename}.data`
+
+if [[ result != "" ]]
+then 
+echo "Primary Key already exists."
+exit
+fi
+
+line=${line}:
+
+done
+
+echo ${line} >> ${tablename}.data
+
+echo "Record added successfully"
+

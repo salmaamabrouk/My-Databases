@@ -1,13 +1,13 @@
-#! /bin/bash
+#!/bin/bash
 
 read -e -p "Enter database name: " name
 
-rg1='[0-9]*'
-rg2='*[\!@#$%^&*()-+=|\["\}\{\]/?><:;\.,`~ ]*'
+condition1='[0-9]*'
+condition2='*[\!@#$%^&*()-+=|\["\}\{\]/?><:;\.,`~ ]*'
 
-if [[ ${name} == $rg1 ]] || [[ ${name} == $rg2 ]] || [[ ${name} == "" ]] || [[ ${name} == ["'"] ]]
+if [[ ${name} == $condition1 ]] || [[ ${name} == $condition2 ]] || [[ ${name} == "" ]] || [[ ${name} == ["'"] ]]
 then
-	echo "Invalid argument.Please make sure DB name starts with an alphabet and doesn't contain spaces or /"
+	echo "Invalid argument.Please make sure DB name doesn't contain spaces or special characters"
 
 
 elif [[ -d ../databases/${name} ]]
@@ -19,6 +19,4 @@ else
 	echo "Database created."
 fi
 
-# [ cond -o cond ] 
-# [[ || ]]
 

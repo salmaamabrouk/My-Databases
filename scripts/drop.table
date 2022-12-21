@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# echo "Tables exist in $1"
+# ls ./databases/databases.list/$1
+
+read -p "Enter table Name: " name
+read -p "Are you sure? (y/n)" check
+
+if [[ ${check} == "y" || ${check} == "Y" ]]
+then
+if [[ ! -f ${name}.meta ]]
+then
+echo "Table does not exist"
+	else
+rm ${name}.data ${name}.meta
+
+sed -i '/"${name}"/d' ../databases/databases.list
+echo "Table successfully deleted."
+exit
+fi
+elif [[ ${check} == "n" || ${check} == "N" ]]
+then
+	echo " Table retained. "
+	exit
+else
+	echo " Invalid choice. "
+	exit
+
+fi
+exit
