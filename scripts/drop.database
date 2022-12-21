@@ -6,21 +6,21 @@ read -p "Are you sure? (y/n)" check
 
 if [[ ${check} == "y" || ${check} == "Y" ]]
 then
-if [ !-d "./databases/${name}" ]
+if [[ ! -d ../databases/${name} ]]
 then
-printf "Database does not exist"
+echo "Database does not exist"
 else
-rm -r ./databases/$name
-sed -i `d "$name"` databases/databases.list
-printf "Database successfully deleted."
+rm -r ../databases/$name
+sed -i '/"$name"/d' ../databases/databases.list
+echo "Database successfully deleted."
 exit
 fi
 elif [[ ${check} == "n" || ${check} == "N" ]]
 then
-	printf " Database retained. "
+	echo " Database retained. "
 	exit
 else
-	printf " Invalid choice. "
+	echo " Invalid choice. "
 	exit
 
 fi

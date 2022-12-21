@@ -1,0 +1,50 @@
+#!/bin/bash
+
+read -e -p "Enter database name: " db
+
+rg1='[0-9]*'
+rg2='*[\!@#$%^&*()-+=|\["\}\{\]/?><:;\.,`~ ]*'
+
+if [[ ${db} == $rg1 ]] || [[ ${db} == $rg2 ]] || [[ ${db} == "" ]] || [[ ${db} == ["'"] ]]
+then
+	echo "Invalid argument.Please make sure DB name starts with an alphabet and doesn't contain spaces or /"
+	exit
+
+
+elif [[ ! -d ../databases/${db} ]]
+then
+	echo "Database does not exist."
+	exit
+
+else
+
+cd ../databases/${db}
+
+fi
+
+pwd
+
+select choice in "1: Show available databases" "2: Create new database" "3: Rename a database" "4: Use a database" "5: Drop a database" "6: Disconnect from engine"	
+do
+		case $choice in 
+				"1: Show available databases")
+			echo "you chose 1"
+			;;
+				"2: Create new database")
+			echo "you chose 1"
+			;;
+				"3: Rename a database")
+			echo "you chose 1"
+			;;
+				"4: Use a database")
+			echo "you chose 4"
+			;;
+				"5: Drop a database")
+			echo "you chose 1"
+			;;
+				"6: Disconnect from engine")
+			echo "You have disconnected from databases"
+			exit
+			;;
+		esac
+done

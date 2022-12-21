@@ -1,20 +1,24 @@
 #! /bin/bash
 
-read -p "Enter database name: " name
-# echo "Please make sure DB name starts with an alphabet and  does not contain spaces or /"
+read -e -p "Enter database name: " name
 
+rg1='[0-9]*'
+rg2='*[\!@#$%^&*()-+=|\["\}\{\]/?><:;\.,`~ ]*'
 
-if [[ $name = */* || $name != ^[a-zA-Z]* ]]
+if [[ ${name} == $rg1 ]] || [[ ${name} == $rg2 ]] || [[ ${name} == "" ]] || [[ ${name} == ["'"] ]]
 then
-	echo "Invalid argument." # Please make sure DB name starts with an alphabet and  doesn't contain spaces or /"
+	echo "Invalid argument.Please make sure DB name starts with an alphabet and doesn't contain spaces or /"
 
 
-elif [[ -d "~/databases/$name" ]]
+elif [[ -d ../databases/${name} ]]
 then
 	echo "Database already exists."
 else
-	mkdir ~/databases/$name
-	echo $name >> ~/databases/databases.list
+	mkdir ../databases/${name}
+	echo ${name} >> ../databases/databases.list
 	echo "Database created."
 fi
+
+# [ cond -o cond ] 
+# [[ || ]]
 

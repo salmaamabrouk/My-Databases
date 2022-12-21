@@ -1,0 +1,33 @@
+#!/bin/bash
+
+read -e -p "Choose database: " old
+read -e -p "Enter new name: " new
+
+rg1='[0-9]*'
+rg2='*[\!@#$%^&*()-+=|\["\}\{\]/?><:;\.,`~ ]*'
+
+if [[ ${new} == $rg1 ]] || [[ ${new} == $rg2 ]] || [[ ${new} == "" ]] || [[ ${new} == ["'"] ]]
+then
+	echo "Invalid argument.Please make sure DB name starts with an alphabet and  doesn't contain spaces or /"
+
+elif [[ ! -d ../databases/${old} ]]
+then
+	echo "Database does not exist."
+
+elif [[ -d ../databases/${new} ]]
+then
+echo "Another databse already already exists under the new name."
+
+
+else
+
+mv ../databases/${old} ../databases/${new}
+
+#sed -i `d "${old}"` databases/databases.list
+#sed -i `d "${new"` databases/databases.list
+
+sed -i 's/${old}/${new}/g' ../databases/databases.list
+
+echo "Database renamed successfully."
+
+fi

@@ -24,20 +24,22 @@ pwd
 
 select choice in "1: Show available databases" "2: Create new database" "3: Rename a database" "4: Use a database" "5: Drop a database" "6: Disconnect from engine"	
 do
-		case $choice in "1: Show available databases")
-			echo "you chose 1"
+		case $choice in 
+
+				"1: Show available databases")
+			./show.databases
 			;;
 				"2: Create new database")
 			./create.database
 			;;
 				"3: Rename a database")
-			echo "you chose 3"
+			./rename.database
 			;;
 				"4: Use a database")
-			echo "you chose 4"
+			./use.database
 			;;
 				"5: Drop a database")
-			echo "you chose 5"
+			./drop.database
 			;;
 				"6: Disconnect from engine")
 			echo "You have disconnected from databases"
