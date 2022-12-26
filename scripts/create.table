@@ -17,12 +17,18 @@ then
 
 else
 	touch ${name}.meta ${name}.data
-	echo ${name} >> tables.list
 
 
-echo "Please enter column names followed by data type: "
-echo "Primary key is determined by first column. Triple Enter when you have no more columns."
+# echo "Please enter column names followed by data type: "
+# echo "Primary key is determined by first column. Triple Enter when you have no more columns."
 
+read -p "Enter number of columns: " num
+
+if [[ ! $num =~ ^[0-9]+$ ]] ; then
+    	echo "Invalid input."
+	rm ${name}.meta ${name}.data
+    exit
+fi
 
 
 read -e -p "Enter primary key: " pk
@@ -31,47 +37,46 @@ read -e -p "Enter datatype (int/str): " pktp
 line1=${pk}
 line2=${pktp}
 
-col="init"
 typeset -i i
 
 i=2
 
-while [[ ${col} != "" ]]
+until [ $i -gt $num ]
+
 do
 
-read -e -p "Enter column ${i} name: " col
+read -e -p "Enter column ${i} name: " col # need also to check if col name already exists :3
 
 if [[ ${col} == $condition1 ]] || [[ ${col} == $condition2 ]] || [[ ${col} == ["'"] ]]
 then
 echo "Invalid input. Please make sure column name doesn't contain spaces or special characters"
 continue
 else
-line1=$line1:$col
-fi
 
 read -e -p "Enter column ${i} datatype (int/str): " tp
 if [[ ${tp} == "int" || ${tp} == "str" ]]
 then
-
+line1=$line1:$col
 line2=$line2:$tp
-elif [[ ${tp} == "" ]]
-then
-continue
 
 else
 echo "Invalid input."
+continue
+fi
 fi
 
 let i=i+1
 
 done
 
+
 echo ${line1} >> ${name}.meta
 echo ${line2} >> ${name}.meta
 
-echo "${i}" >> ${name}.meta
+echo "${num}" >> ${name}.meta
 echo "${pk}" >> ${name}.meta
 
+echo ${name} >> tables.list
 echo "Table created successfully."
 
 fi

@@ -22,7 +22,7 @@ cd ../databases/${db}
 
 fi
 
-select choice in "Show tables" "Create new table" "Describe table" "Rename a table" "Drop table" "Select from table" "Insert record into table" "Delete record from table" "Return to main menu"
+select choice in "Show tables" "Create new table" "Rename a table" "Drop table" "Select from table" "Insert record into table" "Delete record from table" "Return to main menu"
 do
 		case $choice in 
 				"Show tables")
